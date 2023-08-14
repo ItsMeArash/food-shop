@@ -7,7 +7,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <header className="flex justify-between max-w-[900px] m-auto align-center py-5 text-base lg:text-lg xl:text-xl sm:p-3 md:p-5">
+      <header className="flex justify-between max-w-[900px] m-auto align-center py-5 text-base lg:text-lg xl:text-xl px-5 sm:p-3 md:p-5">
         <div>
           <Link href="/" className="text-header font-semibold ">
             IMA Food
