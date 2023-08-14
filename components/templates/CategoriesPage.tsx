@@ -1,11 +1,23 @@
-import { MenuProps } from "@/types";
+import { MenuProps, QueryState } from "@/types";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Card from "../modules/Card";
 
 const CategoriesPage = ({ data }: MenuProps) => {
-  const [query, setQuery] = useState({ difficulty: "", time: "" });
-
   const router = useRouter();
+
+  const [query, setQuery] = useState<QueryState>({ difficulty: "", time: "" });
+
+  useEffect(() => {
+    const { difficulty, time } = router.query;
+
+    const newDifficulty = difficulty ? String(difficulty) : "";
+    const newTime = time ? String(time) : "";
+
+    if (query.difficulty !== newDifficulty || query.time !== newTime) {
+      setQuery({ difficulty: newDifficulty, time: newTime });
+    }
+  }, []);
 
   const changeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setQuery({ ...query, [event.target.name]: event.target.value });
@@ -16,9 +28,19 @@ const CategoriesPage = ({ data }: MenuProps) => {
       alert("Please select a option");
       return;
     }
+    const queryObj = Object.entries(query).reduce(
+      (acc: { [key: string]: string }, [key, value]) => {
+        if (value) {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {}
+    );
+
     router.push({
       pathname: "categories",
-      query,
+      query: queryObj,
     });
   };
 
@@ -60,6 +82,14 @@ const CategoriesPage = ({ data }: MenuProps) => {
           >
             Search
           </button>
+        </div>
+        <div>
+          {!data.length ? (
+            <img src="/images/search.png" alt="category" />
+          ) : null}
+          {data.map((item) => (
+            <Card key={item.id} {...item} />
+          ))}
         </div>
       </div>
     </div>

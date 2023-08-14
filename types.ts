@@ -30,3 +30,8 @@ export interface Context {
   locale?: string | undefined;
   defaultLocale?: string | undefined;
 }
+
+export interface QueryState {
+  difficulty: string;
+  time: string;
+}

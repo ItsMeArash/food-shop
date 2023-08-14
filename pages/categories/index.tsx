@@ -1,11 +1,10 @@
 import CategoriesPage from "@/components/templates/CategoriesPage";
-import { FoodDetails, MenuItem, MenuProps } from "@/types";
+import { MenuItem, MenuProps } from "@/types";
 import { GetServerSidePropsContext } from 'next';
 import { Context } from "vm";
 
 
 const Categories = ({ data }: MenuProps) => {
-  console.log(data);
   return <CategoriesPage data={data} />;
 };
 
