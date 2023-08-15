@@ -83,9 +83,9 @@ const CategoriesPage = ({ data }: MenuProps) => {
             Search
           </button>
         </div>
-        <div>
+        <div className="flex flex-wrap justify-between mt-20">
           {!data.length ? (
-            <img src="/images/search.png" alt="category" />
+            <img src="/images/search.png" alt="category" className="m-auto"/>
           ) : null}
           {data.map((item) => (
             <Card key={item.id} {...item} />
