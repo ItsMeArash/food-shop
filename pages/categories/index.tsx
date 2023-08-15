@@ -15,7 +15,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<Cont
     query: { difficulty, time },
   } = context;
 
-  const res = await fetch("http://localhost:3001/data");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/data`);
   const data = await res.json();
 
   const filteredData = data.filter((item: MenuItem) => {
